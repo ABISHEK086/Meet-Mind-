@@ -1,0 +1,55 @@
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useMeeting } from '@/store/MeetingContext'
+import { ActionCard } from './ActionCard'
+
+export function ActionsPanel() {
+  const { result, addAction } = useMeeting()
+  const [draft, setDraft] = useState('')
+
+  if (!result) return null
+  const remaining = result.actions.filter((a) => !a.done).length
+
+  function submit() {
+    if (!draft.trim()) return
+    addAction(draft.trim())
+    setDraft('')
+  }
+
+  return (
+    <div className="flex h-full flex-col">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="font-display text-sm font-semibold uppercase tracking-wide text-ink-500">Action items</h2>
+        <span className="text-xs text-ink-300">{remaining} open</span>
+      </div>
+
+      <div className="flex-1 space-y-3 overflow-y-auto pr-1">
+        <AnimatePresence initial={false}>
+          {result.actions.map((action, i) => (
+            <ActionCard key={action.id} action={action} index={i} />
+          ))}
+        </AnimatePresence>
+        {result.actions.length === 0 && (
+          <p className="py-8 text-center text-sm text-ink-300">No action items yet — add one below.</p>
+        )}
+      </div>
+
+      <motion.div layout className="mt-4 flex gap-2">
+        <input
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && submit()}
+          placeholder="Add an action item…"
+          className="flex-1 rounded-full border border-line bg-surface-sunk px-4 py-2.5 text-sm text-ink placeholder:text-ink-300 outline-none focus:border-accent/50"
+        />
+        <button
+          onClick={submit}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-lg font-bold text-white transition-colors hover:bg-accent"
+          aria-label="Add action item"
+        >
+          +
+        </button>
+      </motion.div>
+    </div>
+  )
+}
