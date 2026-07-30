@@ -1,7 +1,7 @@
 import { useMeeting } from '@/store/MeetingContext'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
-
+ 
 export function SummaryPanel() {
   const { result } = useMeeting()
   if (!result) return null
