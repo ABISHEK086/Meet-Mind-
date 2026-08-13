@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Card } from '@/components/ui/Card'
 
-interface ExportCardProps {
+interface ExportCardProps { 
   icon: ReactNode
   title: string
   description: string
