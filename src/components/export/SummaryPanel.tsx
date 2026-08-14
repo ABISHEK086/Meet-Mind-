@@ -10,20 +10,20 @@ export function SummaryPanel() {
 
   return (
     <div className="flex h-full flex-col">
-      <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-500">Summary</h2>
+      <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-faint">Summary</h2>
 
       <div className="space-y-6 overflow-y-auto pr-1">
         <section>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-accent">Overview</h3>
-          <p className="text-sm leading-relaxed text-ink-700">{result.summary}</p>
+          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-violet">Overview</h3>
+          <p className="text-sm leading-relaxed text-ink-dim">{result.summary}</p>
         </section>
 
         <section>
-          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-teal">Key decisions</h3>
+          <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-cyan">Key decisions</h3>
           <ul className="space-y-2">
             {result.decisions.map((d, i) => (
-              <li key={i} className="flex gap-2 text-sm text-ink-700">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
+              <li key={i} className="flex gap-2 text-sm text-ink-dim">
+                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
                 {d}
               </li>
             ))}
@@ -34,12 +34,12 @@ export function SummaryPanel() {
           <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-medium">Next steps</h3>
           <ul className="space-y-2">
             {nextSteps.map((a) => (
-              <li key={a.id} className="flex gap-2 text-sm text-ink-700">
+              <li key={a.id} className="flex gap-2 text-sm text-ink-dim">
                 <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-medium" />
-                {a.task} <span className="text-ink-300">— {a.owner}</span>
+                {a.task} <span className="text-ink-faint">— {a.owner}</span>
               </li>
             ))}
-            {nextSteps.length === 0 && <li className="text-sm text-ink-300">Everything's wrapped up.</li>}
+            {nextSteps.length === 0 && <li className="text-sm text-ink-faint">Everything's wrapped up.</li>}
           </ul>
         </section>
       </div>

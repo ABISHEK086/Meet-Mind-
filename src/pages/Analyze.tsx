@@ -49,11 +49,11 @@ export function Analyze() {
   const busy = loading || transcribing
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-73px)] max-w-2xl flex-col items-center justify-center bg-bg px-6 py-16">
+    <div className="mx-auto flex min-h-[calc(100vh-73px)] max-w-2xl flex-col items-center justify-center px-6 py-16">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
-        <Card className="p-6 sm:p-8">
-          <h1 className="mb-1 font-display text-xl font-bold text-ink">Analyze a meeting</h1>
-          <p className="mb-6 text-sm text-ink-500">Paste a transcript or drop in a recording to get started.</p>
+        <Card glow="violet" className="p-6 sm:p-8">
+          <h1 className="mb-1 font-display text-xl font-medium text-ink">Analyze a meeting</h1>
+          <p className="mb-6 text-sm text-ink-faint">Paste a transcript or drop in a recording to get started.</p>
 
           <Tabs
             tabs={[
@@ -74,13 +74,13 @@ export function Analyze() {
                       onChange={(e) => setText(e.target.value)}
                       placeholder="Paste your meeting transcript here…"
                       rows={10}
-                      className="w-full resize-none rounded-xl border border-line bg-surface-sunk p-4 text-sm text-ink placeholder:text-ink-300 outline-none transition-all focus:border-accent/50 focus:bg-surface focus:shadow-[0_0_0_3px_rgba(91,79,232,0.12)]"
+                      className="glass-inset w-full resize-none rounded-xl p-4 text-sm text-ink placeholder:text-ink-faint outline-none transition-all focus:border-violet/50 focus:shadow-[0_0_0_3px_rgba(167,139,250,0.14)]"
                     />
-                    <span className="absolute bottom-3 right-4 text-xs text-ink-300">{charCount} chars</span>
+                    <span className="absolute bottom-3 right-4 text-xs text-ink-faint">{charCount} chars</span>
                   </div>
                   <button
                     onClick={() => setText(SAMPLE)}
-                    className="mt-2 text-xs text-accent hover:underline"
+                    className="mt-2 text-xs text-violet hover:underline"
                   >
                     Use a sample transcript
                   </button>
@@ -89,7 +89,7 @@ export function Analyze() {
                 <motion.div key="audio" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <AudioDropzone onFile={setAudioFile} />
                   {!hasGroqKey && (
-                    <p className="mt-2 text-xs text-ink-300">
+                    <p className="mt-2 text-xs text-ink-faint">
                       Demo mode: no Groq API key is configured, so a sample transcript will be analyzed instead of the actual audio.
                     </p>
                   )}

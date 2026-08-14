@@ -2,18 +2,19 @@ import type { ReactNode, HTMLAttributes } from 'react'
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode
-  tint?: 'none' | 'lavender' | 'mint'
+  glow?: 'none' | 'violet' | 'magenta' | 'cyan'
 }
 
-const tints: Record<string, string> = {
-  none: 'surface',
-  lavender: 'bg-accent-tint border border-accent/10',
-  mint: 'bg-teal-tint border border-teal/10',
+const glows: Record<string, string> = {
+  none: '',
+  violet: 'shadow-[0_0_0_1px_rgba(167,139,250,0.18),0_20px_50px_rgba(124,92,255,0.18)]',
+  magenta: 'shadow-[0_0_0_1px_rgba(244,114,182,0.18),0_20px_50px_rgba(244,114,182,0.16)]',
+  cyan: 'shadow-[0_0_0_1px_rgba(103,232,249,0.18),0_20px_50px_rgba(103,232,249,0.14)]',
 }
 
-export function Card({ children, className = '', tint = 'none', ...props }: CardProps) {
+export function Card({ children, className = '', glow = 'none', ...props }: CardProps) {
   return (
-    <div className={`${tints[tint]} rounded-2xl ${className}`} {...props}>
+    <div className={`glass rounded-3xl ${glows[glow]} ${className}`} {...props}>
       {children}
     </div>
   )

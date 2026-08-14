@@ -8,10 +8,10 @@ interface ExportCardProps {
   description: string
   actionLabel: string
   onAction: () => void | Promise<void>
-  tint?: 'lavender' | 'mint'
+  glow?: 'violet' | 'magenta' | 'cyan'
 }
 
-export function ExportCard({ icon, title, description, actionLabel, onAction, tint = 'lavender' }: ExportCardProps) {
+export function ExportCard({ icon, title, description, actionLabel, onAction, glow = 'violet' }: ExportCardProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle')
 
   async function handleClick() {
@@ -26,20 +26,15 @@ export function ExportCard({ icon, title, description, actionLabel, onAction, ti
   }
 
   return (
-    <Card className="flex flex-col items-center gap-4 p-8 text-center">
-      <div
-        className={`flex h-14 w-14 items-center justify-center rounded-2xl text-2xl ${
-          tint === 'lavender' ? 'bg-accent-tint' : 'bg-teal-tint'
-        }`}
-      >
-        {icon}
-      </div>
+    <Card glow={glow} className="flex flex-col items-center gap-4 p-8 text-center">
+      <div className="glass-inset flex h-14 w-14 items-center justify-center rounded-2xl text-2xl">{icon}</div>
       <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
-      <p className="text-sm text-ink-500">{description}</p>
+      <p className="text-sm text-ink-faint">{description}</p>
 
       <button
         onClick={handleClick}
-        className="relative mt-2 w-full overflow-hidden rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent"
+        className="relative mt-2 w-full overflow-hidden rounded-full px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
+        style={{ background: 'linear-gradient(120deg, var(--color-violet-deep), var(--color-magenta))' }}
       >
         <AnimatePresence mode="wait" initial={false}>
           {status === 'done' ? (

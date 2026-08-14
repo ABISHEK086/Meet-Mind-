@@ -15,7 +15,7 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
   const background = useTransform(
     x,
     [-150, 0, 150],
-    ['rgba(255,93,115,0.10)', 'rgba(255,255,255,0)', 'rgba(18,179,145,0.10)']
+    ['rgba(251,113,133,0.14)', 'rgba(255,255,255,0)', 'rgba(52,211,153,0.14)']
   )
 
   function handleDragEnd(_: unknown, info: PanInfo) {
@@ -45,14 +45,14 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
       dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.6}
       onDragEnd={handleDragEnd}
-      className="group relative touch-pan-y rounded-xl border border-line bg-surface p-4 shadow-[0_1px_2px_rgba(20,18,45,0.03)]"
+      className="glass-inset group relative touch-pan-y rounded-2xl p-4"
     >
       <div className="flex items-start gap-3">
         <button
           aria-label={action.done ? 'Mark incomplete' : 'Mark complete'}
           onClick={() => toggleAction(action.id)}
           className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition-colors ${
-            action.done ? 'border-low bg-low text-white' : 'border-line-strong hover:border-accent'
+            action.done ? 'border-low bg-low text-void' : 'border-line-bright hover:border-violet'
           }`}
         >
           {action.done && (
@@ -63,7 +63,7 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
         </button>
 
         <div className="min-w-0 flex-1">
-          <p className={`text-sm leading-snug transition-all ${action.done ? 'text-ink-300 line-through' : 'text-ink'}`}>
+          <p className={`text-sm leading-snug transition-all ${action.done ? 'text-ink-faint line-through' : 'text-ink'}`}>
             {action.task}
           </p>
 
@@ -79,12 +79,12 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
                 onChange={(e) => setOwnerDraft(e.target.value)}
                 onBlur={commitOwner}
                 onKeyDown={(e) => e.key === 'Enter' && commitOwner()}
-                className="w-24 rounded-md border border-accent/40 bg-accent-tint px-2 py-1 text-xs text-ink outline-none"
+                className="w-24 rounded-md border border-violet/40 bg-violet/10 px-2 py-1 text-xs text-ink outline-none"
               />
             ) : (
               <button
                 onClick={() => setEditingOwner(true)}
-                className="rounded-full bg-surface-sunk px-2.5 py-1 text-[11px] text-ink-500 transition-colors hover:text-ink"
+                className="rounded-full bg-white/5 px-2.5 py-1 text-[11px] text-ink-faint transition-colors hover:text-ink"
               >
                 👤 {action.owner}
               </button>
@@ -94,7 +94,7 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
               type="date"
               value={toDateInputValue(action.dueDate)}
               onChange={(e) => updateAction(action.id, { dueDate: e.target.value || null })}
-              className="rounded-full bg-surface-sunk px-2.5 py-1 text-[11px] text-ink-500 outline-none hover:text-ink"
+              className="rounded-full bg-white/5 px-2.5 py-1 text-[11px] text-ink-faint outline-none [color-scheme:dark] hover:text-ink"
             />
           </div>
         </div>
@@ -102,7 +102,7 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
         <button
           aria-label="Delete action"
           onClick={() => deleteAction(action.id)}
-          className="text-ink-300 opacity-0 transition-opacity hover:text-high group-hover:opacity-100"
+          className="text-ink-faint opacity-0 transition-opacity hover:text-high group-hover:opacity-100"
         >
           ✕
         </button>

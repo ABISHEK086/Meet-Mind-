@@ -25,8 +25,8 @@ export function AudioDropzone({ onFile }: { onFile: (file: File) => void }) {
   return (
     <div
       {...getRootProps()}
-      className={`flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed px-6 py-12 text-center transition-colors cursor-pointer ${
-        isDragActive ? 'border-accent bg-accent-tint' : 'border-line-strong bg-surface-sunk hover:border-accent/40'
+      className={`flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed px-6 py-12 text-center transition-colors cursor-pointer ${
+        isDragActive ? 'border-violet bg-violet/10' : 'glass-inset border-line hover:border-line-bright'
       }`}
     >
       <input {...getInputProps()} />
@@ -37,8 +37,8 @@ export function AudioDropzone({ onFile }: { onFile: (file: File) => void }) {
         <p className="text-sm text-ink">🎧 {fileName}</p>
       ) : (
         <>
-          <p className="text-sm text-ink-700">Drag & drop an audio file, or click to browse</p>
-          <p className="text-xs text-ink-500">MP3, WAV, M4A · up to 25MB</p>
+          <p className="text-sm text-ink-dim">Drag & drop an audio file, or click to browse</p>
+          <p className="text-xs text-ink-faint">MP3, WAV, M4A · up to 25MB</p>
         </>
       )}
     </div>

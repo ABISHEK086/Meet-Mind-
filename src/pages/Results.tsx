@@ -25,18 +25,19 @@ export function Results() {
 
   if (loading) {
     return (
-      <div className="flex min-h-[calc(100vh-73px)] flex-col items-center justify-center gap-4 bg-bg">
+      <div className="flex min-h-[calc(100vh-73px)] flex-col items-center justify-center gap-4">
         <div className="flex gap-1.5">
           {[0, 1, 2].map((i) => (
             <motion.span
               key={i}
-              className="h-3 w-3 rounded-full bg-accent"
+              className="h-3 w-3 rounded-full"
+              style={{ background: 'linear-gradient(135deg, var(--color-violet), var(--color-magenta))' }}
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
             />
           ))}
         </div>
-        <p className="text-sm text-ink-500">Reading between the lines…</p>
+        <p className="text-sm text-ink-faint">Reading between the lines…</p>
       </div>
     )
   }
@@ -46,20 +47,20 @@ export function Results() {
   if (!data) return null
 
   return (
-    <div className="bg-bg">
+    <div>
       <div className="mx-auto max-w-7xl px-6 py-8 pb-24 md:pb-8">
         {/* Desktop 3-panel layout */}
         <div className="hidden gap-6 md:grid md:grid-cols-[1.1fr_1.3fr_1fr] md:items-start">
-          <Card className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
-            <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-500">Transcript</h2>
+          <Card glow="cyan" className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
+            <h2 className="mb-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-faint">Transcript</h2>
             <TranscriptPanel lines={data.transcript} />
           </Card>
 
-          <Card className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
+          <Card glow="violet" className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
             <ActionsPanel />
           </Card>
 
-          <Card className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
+          <Card glow="magenta" className="max-h-[calc(100vh-140px)] overflow-y-auto p-6">
             <SummaryPanel />
           </Card>
         </div>
@@ -74,7 +75,7 @@ export function Results() {
               exit={{ opacity: 0, x: -24 }}
               transition={{ duration: 0.25 }}
             >
-              <Card className="min-h-[60vh] p-5">
+              <Card glow="violet" className="min-h-[60vh] p-5">
                 {mobilePanel === 'transcript' && <TranscriptPanel lines={data.transcript} />}
                 {mobilePanel === 'actions' && <ActionsPanel />}
                 {mobilePanel === 'summary' && <SummaryPanel />}

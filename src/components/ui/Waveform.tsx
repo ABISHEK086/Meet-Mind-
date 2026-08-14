@@ -8,11 +8,6 @@ interface WaveformProps {
   color?: string
 }
 
-/**
- * Signature motif: a waveform whose bars settle into a checklist rhythm —
- * literalizing "voice becomes structure." Used on the landing hero and the
- * audio drop zone. Colored with the accent gradient rather than a flat tone.
- */
 export function Waveform({ bars = 40, active = true, className = '', color }: WaveformProps) {
   const heights = useMemo(() => Array.from({ length: bars }, () => 0.15 + Math.random() * 0.85), [bars])
 
@@ -23,7 +18,7 @@ export function Waveform({ bars = 40, active = true, className = '', color }: Wa
           key={i}
           className="w-[3px] rounded-full"
           style={{
-            background: color ?? `linear-gradient(180deg, var(--color-accent-bright), var(--color-teal))`,
+            background: color ?? `linear-gradient(180deg, var(--color-violet), var(--color-cyan))`,
           }}
           initial={{ height: '10%' }}
           animate={

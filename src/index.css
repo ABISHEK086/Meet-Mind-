@@ -1,41 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,680&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  --font-display: 'Fraunces', serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Base surfaces — cool off-white, not cream */
-  --color-bg: #f6f6fb;
-  --color-surface: #ffffff;
-  --color-surface-sunk: #f0eff8;
+  /* Void — the dark canvas the glass floats on */
+  --color-void: #06060c;
+  --color-void-2: #0c0b18;
+  --color-void-3: #12111f;
 
-  /* Ink */
-  --color-ink: #0b0b14;
-  --color-ink-700: #34324a;
-  --color-ink-500: #6f6d87;
-  --color-ink-300: #a9a7bd;
-  --color-line: #e6e5f0;
-  --color-line-strong: #d3d1e3;
+  /* Ink — text on dark glass */
+  --color-ink: #f6f4fc;
+  --color-ink-dim: #b9b6cf;
+  --color-ink-faint: #7c7a94;
+  --color-line: rgba(255,255,255,0.10);
+  --color-line-bright: rgba(255,255,255,0.22);
 
-  /* Accent system — indigo core, teal secondary */
-  --color-accent: #5b4fe8;
-  --color-accent-bright: #7c6fff;
-  --color-accent-tint: #eeecfc;
-  --color-teal: #12b391;
-  --color-teal-tint: #e2f8f1;
-  --color-coral: #ff5d73;
-  --color-coral-tint: #ffe9ec;
-  --color-amber: #f3a712;
-  --color-amber-tint: #fdf1dc;
+  /* Aurora accent hues */
+  --color-violet: #a78bfa;
+  --color-violet-deep: #7c5cff;
+  --color-magenta: #f472b6;
+  --color-cyan: #67e8f9;
+  --color-amber: #fbbf24;
+  --color-rose: #fb7185;
+  --color-emerald: #34d399;
 
-  --color-high: #ff5d73;
-  --color-medium: #f3a712;
-  --color-low: #12b391;
+  --color-high: #fb7185;
+  --color-medium: #fbbf24;
+  --color-low: #34d399;
 
-  --shadow-soft: 0 1px 2px rgba(20,18,45,0.04), 0 8px 24px rgba(20,18,45,0.06);
-  --shadow-lift: 0 4px 10px rgba(20,18,45,0.06), 0 20px 40px rgba(91,79,232,0.12);
+  --shadow-glass: 0 1px 0 rgba(255,255,255,0.16) inset, 0 8px 32px rgba(0,0,0,0.45);
+  --shadow-glow: 0 0 0 1px rgba(167,139,250,0.15), 0 20px 60px rgba(124,92,255,0.25);
 }
 
 html {
@@ -43,7 +40,7 @@ html {
 }
 
 body {
-  background: var(--color-bg);
+  background: var(--color-void);
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -54,46 +51,70 @@ h1, h2, h3, .font-display {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-violet-deep);
   color: white;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-line-strong);
-  border-radius: 999px;
-}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 999px; }
 
-.surface {
-  background: var(--color-surface);
+/* --- Glass material system --- */
+.glass {
+  background: linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02));
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
   border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-glass);
 }
 
-.surface-glass {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(230,229,240,0.8);
+.glass-strong {
+  background: linear-gradient(155deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--color-line-bright);
+  box-shadow: var(--shadow-glass);
 }
 
-/* Slow ambient hue drift used behind the hero */
-@keyframes hue-drift {
-  0%, 100% { transform: translate(0%, 0%) rotate(0deg); }
-  50% { transform: translate(2%, 3%) rotate(6deg); }
-}
-.hue-drift {
-  animation: hue-drift 18s ease-in-out infinite;
+.glass-inset {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-line);
 }
 
-@keyframes shimmer {
+/* Grain texture — keeps flat gradients from looking like vector output */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Ambient aurora blobs drifting behind glass panels */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
+  33% { transform: translate(4%, -3%) scale(1.08) rotate(8deg); }
+  66% { transform: translate(-3%, 4%) scale(0.96) rotate(-6deg); }
+}
+.aurora-blob {
+  animation: aurora-drift 22s ease-in-out infinite;
+}
+
+@keyframes shimmer-text {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
+}
+
+@keyframes sheen-sweep {
+  0% { transform: translateX(-120%) skewX(-15deg); }
+  100% { transform: translateX(220%) skewX(-15deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -106,6 +127,6 @@ h1, h2, h3, .font-display {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-violet);
   outline-offset: 2px;
 }

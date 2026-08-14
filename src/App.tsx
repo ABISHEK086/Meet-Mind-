@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Header } from '@/components/layout/Header'
+import { AuroraBackground } from '@/components/layout/AuroraBackground'
+import { IntroSplash } from '@/components/layout/IntroSplash'
 import { Home } from '@/pages/Home'
 import { Analyze } from '@/pages/Analyze'
 import { Results } from '@/pages/Results'
@@ -15,9 +18,24 @@ const pageTransition = {
 
 export default function App() {
   const location = useLocation()
+  const [showIntro, setShowIntro] = useState(true)
 
   return (
-    <div className="min-h-screen bg-bg text-ink">
+    <div className="relative min-h-screen text-ink">
+      <AuroraBackground />
+
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            key="intro"
+            exit={{ opacity: 0, filter: 'blur(12px)' }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <IntroSplash onComplete={() => setShowIntro(false)} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Header />
       <AnimatePresence mode="wait">
         <motion.div
