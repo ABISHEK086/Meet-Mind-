@@ -1,38 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,460;9..144,560;9..144,680&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Void — the dark canvas the glass floats on */
-  --color-void: #06060c;
-  --color-void-2: #0c0b18;
-  --color-void-3: #12111f;
+  /* Base surfaces — milky white canvas with light grey secondary surfaces */
+  --color-bg: #faf9f6;
+  --color-surface: #ffffff;
+  --color-surface-sunk: #f0efea;
 
-  /* Ink — text on dark glass */
-  --color-ink: #f6f4fc;
-  --color-ink-dim: #b9b6cf;
-  --color-ink-faint: #7c7a94;
-  --color-line: rgba(255,255,255,0.10);
-  --color-line-bright: rgba(255,255,255,0.22);
+  /* Ink — black text on the milky white base */
+  --color-ink: #121115;
+  --color-ink-700: #3c3a36;
+  --color-ink-500: #7a766f;
+  --color-ink-300: #b6b1a6;
+  --color-line: #e8e4dc;
+  --color-line-strong: #d7d2c5;
 
-  /* Aurora accent hues */
-  --color-violet: #a78bfa;
-  --color-violet-deep: #7c5cff;
-  --color-magenta: #f472b6;
-  --color-cyan: #67e8f9;
-  --color-amber: #fbbf24;
-  --color-rose: #fb7185;
-  --color-emerald: #34d399;
+  /* Accent — cherry red, used sparingly as the single pop of color */
+  --color-accent: #c8102e;
+  --color-accent-bright: #e8384f;
+  --color-accent-tint: #fbe7ea;
 
-  --color-high: #fb7185;
-  --color-medium: #fbbf24;
-  --color-low: #34d399;
+  /* Secondary hues, kept for priority/status meaning rather than decoration */
+  --color-coral: #e8384f;
+  --color-coral-tint: #ffece9;
+  --color-teal: #1f9d72;
+  --color-teal-tint: #e3f5ec;
+  --color-amber: #d98c1f;
+  --color-amber-tint: #faedd6;
 
-  --shadow-glass: 0 1px 0 rgba(255,255,255,0.16) inset, 0 8px 32px rgba(0,0,0,0.45);
-  --shadow-glow: 0 0 0 1px rgba(167,139,250,0.15), 0 20px 60px rgba(124,92,255,0.25);
+  --color-high: #c8102e;
+  --color-medium: #d98c1f;
+  --color-low: #1f9d72;
+
+  --shadow-soft: 0 1px 2px rgba(20,16,14,0.05), 0 10px 26px rgba(20,16,14,0.08);
+  --shadow-lift: 0 4px 10px rgba(20,16,14,0.07), 0 22px 44px rgba(200,16,46,0.16);
 }
 
 html {
@@ -40,7 +45,7 @@ html {
 }
 
 body {
-  background: var(--color-void);
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -51,60 +56,23 @@ h1, h2, h3, .font-display {
 }
 
 ::selection {
-  background: var(--color-violet-deep);
+  background: var(--color-accent);
   color: white;
 }
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.14); border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: var(--color-line-strong); border-radius: 999px; }
 
-/* --- Glass material system --- */
-.glass {
-  background: linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02));
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+.surface {
+  background: var(--color-surface);
   border: 1px solid var(--color-line);
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-soft);
 }
 
-.glass-strong {
-  background: linear-gradient(155deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  border: 1px solid var(--color-line-bright);
-  box-shadow: var(--shadow-glass);
-}
-
-.glass-inset {
-  background: rgba(255,255,255,0.04);
+.surface-sunk {
+  background: var(--color-surface-sunk);
   border: 1px solid var(--color-line);
-}
-
-/* Grain texture — keeps flat gradients from looking like vector output */
-.grain {
-  position: relative;
-  isolation: isolate;
-}
-.grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Ambient aurora blobs drifting behind glass panels */
-@keyframes aurora-drift {
-  0%, 100% { transform: translate(0%, 0%) scale(1) rotate(0deg); }
-  33% { transform: translate(4%, -3%) scale(1.08) rotate(8deg); }
-  66% { transform: translate(-3%, 4%) scale(0.96) rotate(-6deg); }
-}
-.aurora-blob {
-  animation: aurora-drift 22s ease-in-out infinite;
 }
 
 @keyframes shimmer-text {
@@ -112,10 +80,18 @@ h1, h2, h3, .font-display {
   100% { background-position: 200% 50%; }
 }
 
-@keyframes sheen-sweep {
-  0% { transform: translateX(-120%) skewX(-15deg); }
-  100% { transform: translateX(220%) skewX(-15deg); }
+@keyframes drift {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  50% { transform: translate(3%, 2%) scale(1.06); }
 }
+.drift { animation: drift 20s ease-in-out infinite; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.pulse-ring { animation: pulse-ring 2.2s cubic-bezier(0.2,0.6,0.4,1) infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -127,6 +103,6 @@ h1, h2, h3, .font-display {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-violet);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
