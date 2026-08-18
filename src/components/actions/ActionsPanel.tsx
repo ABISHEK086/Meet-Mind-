@@ -31,7 +31,7 @@ export function ActionsPanel() {
           ))}
         </AnimatePresence>
         {result.actions.length === 0 && (
-          <p className="py-8 text-center text-sm text-ink-faint">No action items yet — add one below.</p>
+          <p className="py-8 text-center text-sm text-ink-faint">No action items yet - add one below.</p>
         )}
       </div>
 

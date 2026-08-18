@@ -49,7 +49,7 @@ export function Home() {
             className="mt-6 max-w-md text-ink-500"
           >
             MeetMind listens in on your call and pulls out decisions, owners,
-            and next steps — so nothing said in the room gets lost after it.
+            and next steps - so nothing said in the room gets lost after it.
           </motion.p>
 
           <motion.div
