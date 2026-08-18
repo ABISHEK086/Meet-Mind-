@@ -1,6 +1,7 @@
 import { useMeeting } from '@/store/MeetingContext'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button' 
+import { ArrowRight } from 'lucide-react'
  
 export function SummaryPanel() {
   const { result } = useMeeting()
@@ -45,7 +46,9 @@ export function SummaryPanel() {
       </div>
 
       <Link to="/export" className="mt-6">
-        <Button className="w-full">Export meeting →</Button>
+        <Button className="w-full">
+  Export meeting <ArrowRight className="h-4 w-4" />
+</Button>
       </Link>
     </div>
   )

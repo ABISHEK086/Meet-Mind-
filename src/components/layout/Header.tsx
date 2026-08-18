@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { Mic, Zap, Share2 } from 'lucide-react'
 import { Menu, MenuItem } from '@/components/ui/navbar-menu'
 
 const steps = [
@@ -9,9 +10,9 @@ const steps = [
 ]
 
 const features = [
-  { icon: '🎙️', title: 'Any input', body: 'Paste text or drop an audio file — same result either way.' },
-  { icon: '⚡', title: 'Instant structure', body: 'Action items, owners and priorities extracted in seconds.' },
-  { icon: '📤', title: 'Export anywhere', body: 'Markdown, PDF, or a shareable link — pick what fits your workflow.' },
+  { icon: Mic, title: 'Any input', body: 'Paste text or drop an audio file — same result either way.' },
+  { icon: Zap, title: 'Instant structure', body: 'Action items, owners and priorities extracted in seconds.' },
+  { icon: Share2, title: 'Export anywhere', body: 'Markdown, PDF, or a shareable link — pick what fits your workflow.' },
 ]
 
 export function Header() {
@@ -57,8 +58,8 @@ export function Header() {
               <div className="flex w-72 flex-col gap-4">
                 {features.map((f) => (
                   <div key={f.title} className="flex gap-3">
-                    <span className="surface-sunk flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm">
-                      {f.icon}
+                    <span className="surface-sunk flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-ink-500">
+                      <f.icon className="h-3.5 w-3.5" />
                     </span>
                     <div>
                       <p className="text-sm font-semibold text-ink">{f.title}</p>

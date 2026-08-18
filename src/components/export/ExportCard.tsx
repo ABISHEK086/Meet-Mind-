@@ -27,7 +27,7 @@ export function ExportCard({ icon, title, description, actionLabel, onAction, gl
 
   return (
     <Card glow={glow} className="flex flex-col items-center gap-4 p-8 text-center">
-      <div className="glass-inset flex h-14 w-14 items-center justify-center rounded-2xl text-2xl">{icon}</div>
+      <div className="surface-sunk flex h-14 w-14 items-center justify-center rounded-2xl">{icon}</div>
       <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
       <p className="text-sm text-ink-faint">{description}</p>
 

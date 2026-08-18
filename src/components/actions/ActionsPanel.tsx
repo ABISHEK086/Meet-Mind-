@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMeeting } from '@/store/MeetingContext'
 import { ActionCard } from './ActionCard'
+import { Plus } from 'lucide-react'
 
 export function ActionsPanel() {
   const { result, addAction } = useMeeting()
@@ -42,14 +43,9 @@ export function ActionsPanel() {
           placeholder="Add an action item…"
           className="glass-inset flex-1 rounded-full px-4 py-2.5 text-sm text-ink placeholder:text-ink-faint outline-none focus:border-violet/50"
         />
-        <button
-          onClick={submit}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-lg font-bold text-white transition-transform hover:scale-105"
-          style={{ background: 'linear-gradient(135deg, var(--color-violet-deep), var(--color-magenta))' }}
-          aria-label="Add action item"
-        >
-          +
-        </button>
+       <button onClick={submit} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-bright))' }} aria-label="Add action item">
+  <Plus className="h-5 w-5" />
+</button>
       </motion.div>
     </div>
   )

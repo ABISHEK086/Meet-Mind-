@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/Button'
 import { Waveform } from '@/components/ui/Waveform'
 import { PhoneFrame } from '@/components/ui/PhoneFrame'
 import { VoiceCapturePreview } from '@/components/ui/VoiceCapturePreview'
+import { FileText, Mic } from 'lucide-react'
 
 export function Home() {
   return (
@@ -57,12 +58,16 @@ export function Home() {
             transition={{ duration: 0.6, delay: 0.28 }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
-            <Link to="/analyze?tab=text">
-              <Button size="lg">📋 Paste transcript</Button>
-            </Link>
-            <Link to="/analyze?tab=audio">
-              <Button size="lg" variant="ghost">🎙️ Upload audio</Button>
-            </Link>
+           <Link to="/analyze?tab=text">
+  <Button size="lg">
+    <FileText className="h-4 w-4" /> Paste transcript
+  </Button>
+</Link>
+<Link to="/analyze?tab=audio">
+  <Button size="lg" variant="ghost">
+    <Mic className="h-4 w-4" /> Upload audio
+  </Button>
+</Link>
           </motion.div>
 
           <motion.div
