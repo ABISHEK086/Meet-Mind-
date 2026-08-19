@@ -49,7 +49,7 @@ interface ExtractedPayload {
 async function extractActionsLive(transcript: string): Promise<ExtractedPayload> {
   if (!groq) throw new Error('No Groq API key configured')
   const response = await groq.chat.completions.create({
-    model: 'llama-3.1-8b-instant',
+    model: 'openai/gpt-oss-20b',
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       { role: 'user', content: transcript },
