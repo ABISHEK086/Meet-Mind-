@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { FileText, FileDown, Link2 } from 'lucide-react'
 import { useMeeting } from '@/store/MeetingContext'
 import { ExportCard } from '@/components/export/ExportCard'
+import { MarkdownPreview } from '@/components/export/MarkdownPreview'
 import { toMarkdown, copyMarkdown, downloadPDF, buildShareLink } from '@/lib/export'
 
 export function Export() {
@@ -53,12 +54,7 @@ export function Export() {
           />
         </div>
 
-        <div className="surface mt-12 rounded-2xl p-6">
-          <h2 className="mb-3 font-display text-xs font-semibold uppercase tracking-wide text-ink-500">Markdown preview</h2>
-          <pre className="max-h-64 overflow-auto whitespace-pre-wrap font-mono text-xs leading-relaxed text-ink-700">
-            {toMarkdown(result)}
-          </pre>
-        </div>
+        <MarkdownPreview result={result} markdown={toMarkdown(result)} />
 
         {copiedLink && (
           <p className="mt-4 truncate text-center text-xs text-ink-300">Copied: {copiedLink}</p>

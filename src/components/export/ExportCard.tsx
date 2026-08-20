@@ -34,7 +34,7 @@ export function ExportCard({ icon, title, description, actionLabel, onAction, gl
       <button
         onClick={handleClick}
         className="relative mt-2 w-full overflow-hidden rounded-full px-6 py-3 text-sm font-semibold text-white transition-transform hover:scale-[1.02]"
-        style={{ background: 'linear-gradient(120deg, var(--color-violet-deep), var(--color-magenta))' }}
+        style={{ background: 'linear-gradient(120deg, #c8102e, #e8384f)' }}
       >
         <AnimatePresence mode="wait" initial={false}>
           {status === 'done' ? (

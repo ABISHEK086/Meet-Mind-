@@ -1,6 +1,6 @@
 import type { TranscriptLine } from '@/types'
 
-const speakerColors = ['text-violet', 'text-cyan', 'text-medium', 'text-magenta']
+const speakerColors = ['text-accent', 'text-teal', 'text-medium', 'text-coral']
 
 function colorFor(speaker: string) {
   let hash = 0
@@ -13,10 +13,10 @@ export function TranscriptPanel({ lines }: { lines: TranscriptLine[] }) {
     <div className="space-y-4 font-mono text-sm leading-relaxed">
       {lines.map((line, i) => (
         <div key={i} className="flex gap-3">
-          <span className="mt-0.5 shrink-0 text-[11px] text-ink-faint">{line.timestamp}</span>
+          <span className="mt-0.5 shrink-0 text-[11px] text-ink-300">{line.timestamp}</span>
           <div>
             <span className={`mr-2 font-semibold ${colorFor(line.speaker)}`}>{line.speaker}</span>
-            <span className="text-ink-dim">{line.text}</span>
+            <span className="text-ink-700">{line.text}</span>
           </div>
         </div>
       ))}

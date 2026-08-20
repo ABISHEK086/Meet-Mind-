@@ -134,7 +134,7 @@ export function ActionCard({ action, index }: { action: ActionItem; index: numbe
                 className="flex items-center gap-1.5 text-[11px] text-ink-500 transition-colors hover:text-ink"
               >
                 <span
-                  className="flex h-4 w-4 items-center justify-center rounded-full text-[8px] font-bold text-white"
+                  className="flex h-[18px] w-[18px] items-center justify-center rounded-full text-[9px] font-bold leading-none text-white"
                   style={{ background: avatarColor(action.owner) }}
                 >
                   {initials(action.owner)}
