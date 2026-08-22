@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { AuthShowcase } from '@/components/auth/AuthShowcase'
+import { AuthShowcase, MobileAuthHeader } from '@/components/auth/AuthShowcase'
 import { signup, saveToken, googleLoginUrl, ApiError } from '@/lib/api'
 
 export function SignUp() {
@@ -32,14 +32,15 @@ export function SignUp() {
   return (
     <div className="grid min-h-[calc(100vh-73px)] lg:grid-cols-[0.94fr_1.06fr]">
       <AuthShowcase />
+      <MobileAuthHeader />
 
       {/* Right — signup form */}
-      <div className="flex items-center justify-center px-6 py-16 sm:px-10">
+      <div className="flex items-center justify-center px-5 py-8 sm:px-10 sm:py-16">
         <div className="w-full max-w-md">
-          <h1 className="text-center font-display text-3xl font-bold tracking-tight text-ink">Create an account</h1>
+          <h1 className="text-center font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">Create an account</h1>
           <p className="mt-2 text-center text-sm text-ink-500">Start turning your meetings into action, free.</p>
 
-          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+          <div className="mt-7 grid grid-cols-2 gap-3">
             <SocialButton icon={<GoogleIcon />} label="Google" onClick={() => (window.location.href = googleLoginUrl())} />
             <SocialButton icon={<AppleIcon />} label="Apple" />
           </div>
@@ -51,7 +52,7 @@ export function SignUp() {
           </div>
 
           <form className="space-y-4 text-left" onSubmit={handleSubmit}>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               <Field label="First name" value={firstName} onChange={setFirstName} />
               <Field label="Last name" value={lastName} onChange={setLastName} />
             </div>

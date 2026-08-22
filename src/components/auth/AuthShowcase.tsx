@@ -31,6 +31,49 @@ const tiles = [
   },
 ]
 
+export function MobileAuthHeader() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % tiles.length)
+    }, 2800)
+    return () => window.clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="flex flex-col items-center gap-4 bg-ink px-6 pb-6 pt-8 text-center lg:hidden">
+      <div className="flex items-center gap-2">
+        <span
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-display font-bold text-white"
+          style={{ background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-bright))' }}
+        >
+          M
+        </span>
+        <span className="font-display text-base font-bold tracking-tight text-white">MeetMind</span>
+      </div>
+
+      {/* Compact image strip — same tiles as the desktop collage, sized for phones */}
+      <div className="flex w-full max-w-xs gap-2">
+        {tiles.map((tile, index) => (
+          <div key={tile.src} className="relative h-16 flex-1 overflow-visible rounded-md">
+            <img
+              src={tile.src}
+              alt=""
+              className={`h-full w-full rounded-md object-cover transition-opacity duration-700 ${
+                activeIndex === index ? 'opacity-100' : 'opacity-40'
+              }`}
+            />
+            <FocusCorners active={activeIndex === index} />
+          </div>
+        ))}
+      </div>
+
+      <p className="max-w-[240px] text-xs leading-relaxed text-white/70">{tiles[activeIndex].text}</p>
+    </div>
+  )
+}
+
 export function AuthShowcase() {
   const [activeIndex, setActiveIndex] = useState(0)
 

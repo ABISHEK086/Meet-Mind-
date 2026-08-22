@@ -11,6 +11,7 @@ import { Export } from '@/pages/Export'
 import { SignUp } from '@/pages/SignUp'
 import { SignIn } from '@/pages/SignIn'
 import { OAuthSuccess } from '@/pages/OAuthSuccess'
+import { RequireAuth, RedirectIfAuthed } from '@/components/auth/RouteGuards'
 
 const pageTransition = {
   initial: { opacity: 0, y: 8 },
@@ -49,12 +50,12 @@ export default function App() {
           transition={pageTransition.transition}
         >
           <Routes location={location}>
-            <Route path="/" element={<Home />} />
-            <Route path="/analyze" element={<Analyze />} />
-            <Route path="/results" element={<Results />} />
-            <Route path="/export" element={<Export />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+            <Route path="/analyze" element={<RequireAuth><Analyze /></RequireAuth>} />
+            <Route path="/results" element={<RequireAuth><Results /></RequireAuth>} />
+            <Route path="/export" element={<RequireAuth><Export /></RequireAuth>} />
+            <Route path="/signup" element={<RedirectIfAuthed><SignUp /></RedirectIfAuthed>} />
+            <Route path="/signin" element={<RedirectIfAuthed><SignIn /></RedirectIfAuthed>} />
             <Route path="/oauth-success" element={<OAuthSuccess />} />
           </Routes>
         </motion.div>
