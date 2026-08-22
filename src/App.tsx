@@ -8,6 +8,9 @@ import { Home } from '@/pages/Home'
 import { Analyze } from '@/pages/Analyze'
 import { Results } from '@/pages/Results'
 import { Export } from '@/pages/Export'
+import { SignUp } from '@/pages/SignUp'
+import { SignIn } from '@/pages/SignIn'
+import { OAuthSuccess } from '@/pages/OAuthSuccess'
 
 const pageTransition = {
   initial: { opacity: 0, y: 8 },
@@ -50,6 +53,9 @@ export default function App() {
             <Route path="/analyze" element={<Analyze />} />
             <Route path="/results" element={<Results />} />
             <Route path="/export" element={<Export />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/oauth-success" element={<OAuthSuccess />} />
           </Routes>
         </motion.div>
       </AnimatePresence>
