@@ -18,12 +18,12 @@ export function Export() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
+    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <h1 className="text-center font-display text-2xl font-bold text-ink">Export your meeting</h1>
+        <h1 className="text-center font-display text-xl font-bold text-ink sm:text-2xl">Export your meeting</h1>
         <p className="mt-2 text-center text-sm text-ink-500">Choose the format that fits your workflow.</p>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
           <ExportCard
             icon={<FileText className="h-6 w-6 text-accent" />}
             title="Copy Markdown"
@@ -54,7 +54,10 @@ export function Export() {
           />
         </div>
 
-        <MarkdownPreview result={result} markdown={toMarkdown(result)} />
+        {/* overflow-x-auto guards against MarkdownPreview's code block being wider than the phone */}
+        <div className="overflow-x-auto">
+          <MarkdownPreview result={result} markdown={toMarkdown(result)} />
+        </div>
 
         {copiedLink && (
           <p className="mt-4 truncate text-center text-xs text-ink-300">Copied: {copiedLink}</p>

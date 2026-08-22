@@ -82,10 +82,10 @@ export function Analyze() {
   const busy = loading || transcribing
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-73px)] max-w-2xl flex-col items-center justify-center px-6 py-16">
+    <div className="mx-auto flex min-h-[calc(100vh-73px)] max-w-2xl flex-col items-center justify-center px-4 py-10 sm:px-6 sm:py-16">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
-        <Card glow="violet" className="p-6 sm:p-8">
-          <h1 className="mb-1 font-display text-xl font-bold text-ink">Analyze a meeting</h1>
+        <Card glow="violet" className="p-5 sm:p-8">
+          <h1 className="mb-1 font-display text-lg font-bold text-ink sm:text-xl">Analyze a meeting</h1>
           <p className="mb-6 text-sm text-ink-500">Paste a transcript or drop in a recording to get started.</p>
 
           <Tabs
@@ -120,7 +120,7 @@ export function Analyze() {
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       placeholder="Paste your meeting transcript here…"
-                      rows={10}
+                      rows={8}
                       className="surface-sunk w-full resize-none rounded-xl p-4 text-sm text-ink placeholder:text-ink-300 outline-none transition-all focus:border-accent/50 focus:shadow-[0_0_0_3px_rgba(91,108,246,0.12)]"
                     />
                     <span className="absolute bottom-3 right-4 text-xs text-ink-300">{charCount} chars</span>

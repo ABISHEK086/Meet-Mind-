@@ -9,9 +9,9 @@ import { VoiceCapturePreview } from '@/components/ui/VoiceCapturePreview'
 export function Home() {
   return (
     <div className="relative">
-      <section className="relative mx-auto grid max-w-6xl gap-16 px-6 pb-16 pt-10 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <section className="relative mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-8 sm:px-6 sm:pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
         {/* Left — headline */}
-        <div className="relative">
+        <div className="relative text-center lg:text-left">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export function Home() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08 }}
-            className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl"
+            className="font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl lg:leading-[1.05]"
           >
             Your meetings.
             <br />
@@ -46,7 +46,7 @@ export function Home() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
-            className="mt-6 max-w-md text-ink-500"
+            className="mx-auto mt-6 max-w-md text-ink-500 lg:mx-0"
           >
             MeetMind listens in on your call and pulls out decisions, owners,
             and next steps - so nothing said in the room gets lost after it.
@@ -56,15 +56,15 @@ export function Home() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.28 }}
-            className="mt-10 flex flex-col gap-3 sm:flex-row"
+            className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start"
           >
             <Link to="/analyze?tab=text">
-              <Button size="lg">
+              <Button size="lg" className="w-full sm:w-auto">
                 <FileText className="h-4 w-4" /> Paste transcript
               </Button>
             </Link>
             <Link to="/analyze?tab=audio">
-              <Button size="lg" variant="ghost">
+              <Button size="lg" variant="ghost" className="w-full sm:w-auto">
                 <Mic className="h-4 w-4" /> Upload audio
               </Button>
             </Link>
@@ -74,7 +74,7 @@ export function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-14 opacity-60"
+            className="mt-14 hidden opacity-60 sm:block"
           >
             <Waveform bars={36} className="h-10" />
           </motion.div>
@@ -85,9 +85,11 @@ export function Home() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="relative flex justify-center py-10 lg:justify-end lg:py-4"
+          className="relative flex justify-center py-6 lg:justify-end lg:py-4"
         >
-          <div className="relative">
+          {/* Slightly shrink the whole phone + floating-card cluster on narrow phones so it
+              never risks pushing past the viewport width. */}
+          <div className="relative origin-top scale-95 sm:scale-100">
             {/* Floating card — action item just captured */}
             <motion.div
               initial={{ opacity: 0, x: -12, y: 8 }}
