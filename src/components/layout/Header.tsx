@@ -6,15 +6,15 @@ import { Menu, MenuItem } from '@/components/ui/navbar-menu'
 import { clearToken } from '@/lib/api'
 
 const steps = [
-  { n: '01', title: 'Paste or upload', body: 'Drop in a transcript or an audio recording — no setup required.' },
+  { n: '01', title: 'Paste or upload', body: 'Drop in a transcript or an audio recording - no setup required.' },
   { n: '02', title: 'MeetMind listens', body: 'Whisper transcribes, then a language model reads for intent.' },
   { n: '03', title: 'Leave with a plan', body: 'Owners, priorities, and due dates land in one shareable board.' },
 ]
 
 const features = [
-  { icon: Mic, title: 'Any input', body: 'Paste text or drop an audio file — same result either way.' },
+  { icon: Mic, title: 'Any input', body: 'Paste text or drop an audio file - same result either way.' },
   { icon: Zap, title: 'Instant structure', body: 'Action items, owners and priorities extracted in seconds.' },
-  { icon: Share2, title: 'Export anywhere', body: 'Markdown, PDF, or a shareable link — pick what fits your workflow.' },
+  { icon: Share2, title: 'Export anywhere', body: 'Markdown, PDF, or a shareable link - pick what fits your workflow.' },
 ]
 
 export function Header() {
