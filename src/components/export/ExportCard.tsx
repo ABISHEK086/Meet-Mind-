@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Card } from '@/components/ui/Card'
+import { useToast } from '@/components/ui/Toast'
 
 interface ExportCardProps {
   icon: ReactNode
@@ -15,6 +16,10 @@ interface ExportCardProps {
   formatTag: string
   /** Stagger delay in seconds for the entrance animation */
   delay?: number
+  /** Toast shown on success. Defaults to a generic "<title> ready." if omitted. */
+  successMessage?: string
+  /** Toast shown on failure. Defaults to a generic message naming the action if omitted. */
+  errorMessage?: string
 }
 
 const toneVar: Record<ExportCardProps['tone'], string> = {
@@ -33,19 +38,24 @@ export function ExportCard({
   tone,
   formatTag,
   delay = 0,
+  successMessage,
+  errorMessage,
 }: ExportCardProps) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle')
   const [hovered, setHovered] = useState(false)
   const color = toneVar[tone]
+  const toast = useToast()
 
   async function handleClick() {
     setStatus('loading')
     try {
       await onAction()
       setStatus('done')
+      toast.success(successMessage ?? `${title} ready.`)
       setTimeout(() => setStatus('idle'), 1800)
     } catch {
       setStatus('idle')
+      toast.error(errorMessage ?? `Couldn't complete "${actionLabel}". Try again.`)
     }
   }
 

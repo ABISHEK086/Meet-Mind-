@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { AuthShowcase, MobileAuthHeader } from '@/components/auth/AuthShowcase'
 import { login, saveToken, googleLoginUrl, ApiError } from '@/lib/api'
+import { useToast } from '@/components/ui/Toast'
 
 export function SignIn() {
   const [email, setEmail] = useState('')
@@ -11,6 +12,7 @@ export function SignIn() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const toast = useToast()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -19,9 +21,12 @@ export function SignIn() {
     try {
       const res = await login({ email, password })
       saveToken(res.access_token)
+      toast.success('Welcome back!')
       navigate('/')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Could not sign you in. Please try again.')
+      const message = err instanceof ApiError ? err.message : 'Could not sign you in. Please try again.'
+      setError(message)
+      toast.error(message)
     } finally {
       setLoading(false)
     }

@@ -12,6 +12,7 @@ import { SignUp } from '@/pages/SignUp'
 import { SignIn } from '@/pages/SignIn'
 import { OAuthSuccess } from '@/pages/OAuthSuccess'
 import { RequireAuth, RedirectIfAuthed } from '@/components/auth/RouteGuards'
+import { ToastProvider } from '@/components/ui/Toast'
 
 const pageTransition = {
   initial: { opacity: 0, y: 8 },
@@ -25,41 +26,50 @@ export default function App() {
   const [showIntro, setShowIntro] = useState(true)
 
   return (
-    <div className="relative min-h-screen text-ink">
-      <AuroraBackground />
+    <ToastProvider>
+      <div className="relative min-h-screen text-ink">
+        <AnimatePresence>
+          {showIntro && (
+            <motion.div
+              key="intro"
+              exit={{ opacity: 0, filter: 'blur(12px)' }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <IntroSplash onComplete={() => setShowIntro(false)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      <AnimatePresence>
-        {showIntro && (
-          <motion.div
-            key="intro"
-            exit={{ opacity: 0, filter: 'blur(12px)' }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <IntroSplash onComplete={() => setShowIntro(false)} />
-          </motion.div>
+        {/* Nothing else mounts until the intro is done — otherwise every entrance
+            animation below finishes silently behind the splash, and the whole
+            dashboard just pops in fully-formed instead of animating in. */}
+        {!showIntro && (
+          <>
+            <AuroraBackground />
+
+            <Header />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={location.pathname}
+                initial={pageTransition.initial}
+                animate={pageTransition.animate}
+                exit={pageTransition.exit}
+                transition={pageTransition.transition}
+              >
+                <Routes location={location}>
+                  <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+                  <Route path="/analyze" element={<RequireAuth><Analyze /></RequireAuth>} />
+                  <Route path="/results" element={<RequireAuth><Results /></RequireAuth>} />
+                  <Route path="/export" element={<RequireAuth><Export /></RequireAuth>} />
+                  <Route path="/signup" element={<RedirectIfAuthed><SignUp /></RedirectIfAuthed>} />
+                  <Route path="/signin" element={<RedirectIfAuthed><SignIn /></RedirectIfAuthed>} />
+                  <Route path="/oauth-success" element={<OAuthSuccess />} />
+                </Routes>
+              </motion.div>
+            </AnimatePresence>
+          </>
         )}
-      </AnimatePresence>
-
-      <Header />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={location.pathname}
-          initial={pageTransition.initial}
-          animate={pageTransition.animate}
-          exit={pageTransition.exit}
-          transition={pageTransition.transition}
-        >
-          <Routes location={location}>
-            <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
-            <Route path="/analyze" element={<RequireAuth><Analyze /></RequireAuth>} />
-            <Route path="/results" element={<RequireAuth><Results /></RequireAuth>} />
-            <Route path="/export" element={<RequireAuth><Export /></RequireAuth>} />
-            <Route path="/signup" element={<RedirectIfAuthed><SignUp /></RedirectIfAuthed>} />
-            <Route path="/signin" element={<RedirectIfAuthed><SignIn /></RedirectIfAuthed>} />
-            <Route path="/oauth-success" element={<OAuthSuccess />} />
-          </Routes>
-        </motion.div>
-      </AnimatePresence>
-    </div>
+      </div>
+    </ToastProvider>
   )
 }

@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { AuthShowcase, MobileAuthHeader } from '@/components/auth/AuthShowcase'
 import { signup, saveToken, googleLoginUrl, ApiError } from '@/lib/api'
+import { useToast } from '@/components/ui/Toast'
 
 export function SignUp() {
   const [firstName, setFirstName] = useState('')
@@ -13,6 +14,7 @@ export function SignUp() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const toast = useToast()
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -21,9 +23,12 @@ export function SignUp() {
     try {
       const res = await signup({ first_name: firstName, last_name: lastName, email, password })
       saveToken(res.access_token)
+      toast.success(`Welcome, ${firstName || 'there'} — your account is ready.`)
       navigate('/')
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : 'Could not create your account. Please try again.')
+      const message = err instanceof ApiError ? err.message : 'Could not create your account. Please try again.'
+      setError(message)
+      toast.error(message)
     } finally {
       setLoading(false)
     }

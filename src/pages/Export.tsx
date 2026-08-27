@@ -34,6 +34,8 @@ export function Export() {
             tone="accent"
             formatTag=".md"
             delay={0}
+            successMessage="Markdown copied to clipboard."
+            errorMessage="Couldn't copy the markdown. Try again."
           />
           <ExportCard
             icon={<FileDown className="h-6 w-6" />}
@@ -45,6 +47,8 @@ export function Export() {
             tone="coral"
             formatTag=".pdf"
             delay={0.08}
+            successMessage="PDF downloaded."
+            errorMessage="Couldn't generate the PDF. Try again."
           />
           <ExportCard
             icon={<Link2 className="h-6 w-6" />}
@@ -60,6 +64,8 @@ export function Export() {
             tone="teal"
             formatTag="URL"
             delay={0.16}
+            successMessage="Share link copied to clipboard."
+            errorMessage="Couldn't copy the link. Try again."
           />
         </div>
 

@@ -8,7 +8,7 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.6 }}
           className="font-display text-xs font-medium uppercase tracking-[0.3em] text-ink-faint"
         >
           Meetings, organized
@@ -16,11 +16,10 @@ export function IntroSplash({ onComplete }: { onComplete: () => void }) {
 
         <h1 className="font-display text-6xl font-medium tracking-tight text-ink sm:text-7xl">
           <TextRoll
-            duration={0.45}
-            getEnterDelay={(i) => i * 0.055}
-            getExitDelay={(i) => i * 0.055 + 0.18}
-            // Fires once the last letter finishes settling — pause briefly, then hand off to the app
-            onAnimationComplete={() => setTimeout(onComplete, 450)}
+            duration={0.6}
+            getEnterDelay={(i) => i * 0.16}
+            getExitDelay={(i) => i * 0.16 + 0.55}
+            onAnimationComplete={() => setTimeout(onComplete, 600)}
           >
             MeetMind
           </TextRoll>
