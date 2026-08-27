@@ -1,11 +1,13 @@
 import { useState, useMemo, useCallback, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FileText, Mic, Sparkles } from 'lucide-react'
+import { FileText, Mic, Sparkles, AlertTriangle, RefreshCw, LifeBuoy } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Tabs } from '@/components/ui/Tabs'
 import { Button } from '@/components/ui/Button'
 import { FileUpload, type FileUploadItem } from '@/components/ui/file-upload'
+import { EmptyState } from '@/components/ui/EmptyState'
+import { useToast } from '@/components/ui/Toast'
 import { useMeeting } from '@/store/MeetingContext'
 import { transcribeAudio, hasGroqKey } from '@/lib/groq'
 
@@ -27,6 +29,7 @@ export function Analyze() {
   const timersRef = useRef<Map<string, ReturnType<typeof setInterval>>>(new Map())
   const navigate = useNavigate()
   const { analyze, loading, error } = useMeeting()
+  const toast = useToast()
 
   const charCount = text.length
   const canSubmit = useMemo(() => (tab === 'text' ? text.trim().length > 20 : !!audioFile), [tab, text, audioFile])
@@ -160,7 +163,26 @@ export function Analyze() {
             </AnimatePresence>
           </div>
 
-          {error && <p className="mt-4 text-sm text-high">{error}</p>}
+          {error && (
+            <div className="mt-4">
+              <EmptyState
+                icon={<AlertTriangle className="h-5 w-5" />}
+                title="Something went wrong"
+                description={error}
+                tone="error"
+                primaryAction={{
+                  label: 'Try again',
+                  icon: <RefreshCw className="h-4 w-4" />,
+                  onClick: handleAnalyze,
+                }}
+                secondaryAction={{
+                  label: 'Contact support',
+                  icon: <LifeBuoy className="h-4 w-4" />,
+                  onClick: () => toast.info('Opening a support ticket.', { title: 'Support' }),
+                }}
+              />
+            </div>
+          )}
 
           <Button onClick={handleAnalyze} disabled={!canSubmit || busy} className="mt-6 w-full">
             {busy ? (
