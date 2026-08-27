@@ -25,23 +25,29 @@ export function Export() {
 
         <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-3 sm:gap-6">
           <ExportCard
-            icon={<FileText className="h-6 w-6 text-accent" />}
+            icon={<FileText className="h-6 w-6" />}
             title="Copy Markdown"
             description="Checklist-formatted, ready to paste into Notion, Slack, or GitHub."
             actionLabel="Copy to clipboard"
             onAction={() => copyMarkdown(result)}
             glow="violet"
+            tone="accent"
+            formatTag=".md"
+            delay={0}
           />
           <ExportCard
-            icon={<FileDown className="h-6 w-6 text-coral" />}
+            icon={<FileDown className="h-6 w-6" />}
             title="Download PDF"
             description="A clean, printable summary with decisions and action items."
             actionLabel="Download PDF"
             onAction={() => downloadPDF(result)}
             glow="magenta"
+            tone="coral"
+            formatTag=".pdf"
+            delay={0.08}
           />
           <ExportCard
-            icon={<Link2 className="h-6 w-6 text-teal" />}
+            icon={<Link2 className="h-6 w-6" />}
             title="Share link"
             description="A read-only link that encodes this meeting's results."
             actionLabel="Copy share link"
@@ -51,6 +57,9 @@ export function Export() {
               setCopiedLink(link)
             }}
             glow="cyan"
+            tone="teal"
+            formatTag="URL"
+            delay={0.16}
           />
         </div>
 

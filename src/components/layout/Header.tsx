@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Mic, Zap, Share2, Menu as MenuIcon, X } from 'lucide-react'
+import { Mic, Zap, Share2, Menu as MenuIcon, X, LogOut } from 'lucide-react'
 import { Menu, MenuItem } from '@/components/ui/navbar-menu'
+import { clearToken } from '@/lib/api'
 
 const steps = [
   { n: '01', title: 'Paste or upload', body: 'Drop in a transcript or an audio recording — no setup required.' },
@@ -18,10 +19,17 @@ const features = [
 
 export function Header() {
   const location = useLocation()
+  const navigate = useNavigate()
   const isHome = location.pathname === '/'
   const isAuthPage = location.pathname === '/signup' || location.pathname === '/signin'
   const [active, setActive] = useState<string | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  function handleLogout() {
+    clearToken()
+    setMobileOpen(false)
+    navigate('/signin')
+  }
 
   return (
     <header className="surface sticky top-0 z-40 border-x-0 border-t-0 !rounded-none">
@@ -37,7 +45,7 @@ export function Header() {
         </Link>
 
         {isHome ? (
-          <>
+          <div className="flex items-center gap-2">
             <Menu setActive={setActive} className="hidden sm:flex">
               <MenuItem setActive={setActive} active={active} item="How it works">
                 <div className="flex w-72 flex-col gap-4">
@@ -75,6 +83,15 @@ export function Header() {
               </MenuItem>
             </Menu>
 
+            {/* Logged-in user's way out — Home is auth-gated, so anyone seeing this header is signed in */}
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="hidden items-center gap-1.5 text-sm font-medium text-ink-500 transition-colors hover:text-ink sm:flex"
+            >
+              <LogOut className="h-3.5 w-3.5" /> Log out
+            </button>
+
             {/* Mobile: hamburger toggle, replaces the hover-menu on small screens */}
             <button
               type="button"
@@ -85,7 +102,7 @@ export function Header() {
             >
               {mobileOpen ? <X className="h-4.5 w-4.5" /> : <MenuIcon className="h-4.5 w-4.5" />}
             </button>
-          </>
+          </div>
         ) : isAuthPage ? null : (
           <Link to="/analyze" className="text-sm font-medium text-ink-500 transition-colors hover:text-ink">
             New meeting
@@ -145,13 +162,13 @@ export function Header() {
                 >
                   New meeting
                 </Link>
-                <Link
-                  to="/signin"
-                  onClick={() => setMobileOpen(false)}
-                  className="rounded-xl px-4 py-2.5 text-center text-sm font-medium text-ink-500"
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-center text-sm font-medium text-ink-500"
                 >
-                  Sign in
-                </Link>
+                  <LogOut className="h-3.5 w-3.5" /> Log out
+                </button>
               </div>
             </div>
           </motion.div>
