@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { saveToken } from '@/lib/api'
 import { useToast } from '@/components/ui/Toast'
-
+ 
 export function OAuthSuccess() {
   const [params] = useSearchParams()
   const navigate = useNavigate()
