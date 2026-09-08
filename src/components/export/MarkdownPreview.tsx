@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Copy, Check, FileText, ListChecks } from 'lucide-react'
 import type { MeetingResult } from '@/types'
 
-function RawLine({ line }: { line: string }) {
+function RawLine({ line }: { line: string }) {                                                   
   if (line.startsWith('## ')) {
     return <div className="mb-1 mt-3 font-semibold text-accent">{line}</div>
   }
