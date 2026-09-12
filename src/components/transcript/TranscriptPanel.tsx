@@ -4,7 +4,7 @@ const speakerColors = ['text-accent', 'text-teal', 'text-medium', 'text-coral']
 
 function colorFor(speaker: string) {
   let hash = 0
-  for (let i = 0; i < speaker.length; i++) hash = (hash + speaker.charCodeAt(i)) % speakerColors.length
+  for (let i = 0; i < speaker.length; i++) hash = (hash + speaker.charCodeAt(i)) % speakerColors.length 
   return speakerColors[hash]
 }
 
