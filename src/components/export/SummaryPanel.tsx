@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import type { Priority } from '@/types'
-
+ 
 const AVATAR_HUES = ['#5b6cf6', '#ff7a59', '#16b981', '#d98c1f', '#8b5cf6', '#0ea5e9']
 
 function avatarColor(name: string) {
