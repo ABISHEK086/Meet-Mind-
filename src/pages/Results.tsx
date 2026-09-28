@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/Card'
 import { TranscriptPanel } from '@/components/transcript/TranscriptPanel'
 import { ActionsPanel } from '@/components/actions/ActionsPanel'
 import { SummaryPanel } from '@/components/export/SummaryPanel'
-import { MobileNav, type MobilePanel } from '@/components/layout/MobileNav'
+import { MobileNav, type MobilePanel } from '@/components/layout/MobileNav' 
 import { useMeeting } from '@/store/MeetingContext'
 import { decodeShareLink } from '@/lib/export'
 
