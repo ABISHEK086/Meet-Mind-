@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { AuthShowcase, MobileAuthHeader } from '@/components/auth/AuthShowcase'
 import { signup, saveToken, googleLoginUrl, ApiError } from '@/lib/api'
 import { useToast } from '@/components/ui/Toast'
-
+ 
 export function SignUp() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
