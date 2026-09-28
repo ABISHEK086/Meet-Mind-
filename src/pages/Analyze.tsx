@@ -15,7 +15,7 @@ const SAMPLE = `[00:00] Priya: Let's kick off — first item is the v2 launch da
 [00:14] Marcus: I think we should target next Friday, but the contract with Acme still needs to go out.
 [00:29] Priya: Agreed, we'll go with Friday as the final call. Marcus, can you send the updated contract by tomorrow?
 [00:41] Marcus: Yes, I'll send it tomorrow, marking it urgent since legal needs a few days.
-[00:55] Dana: For the offsite, I still need to book the venue. No rush, I'll do it next week.
+[00:55] Dana: For the offsite, I still need to book the venue. No rush, I'll do it next week. 
 [01:10] Priya: Sounds good. Also, we decided to move the design review to Thursdays going forward.
 [01:22] Dana: I'll update the calendar invite today, that one's asap since people need notice.`
 
